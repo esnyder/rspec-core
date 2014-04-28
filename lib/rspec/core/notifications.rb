@@ -71,6 +71,16 @@ module RSpec::Core
         end
       end
 
+      def backtrace
+        backtrace_formatter.format_backtrace(exception.backtrace, example.metadata)
+      end
+
+      def colorize_backtrace colorizer
+        backtrace.map do |backtrace_info|
+          colorizer.wrap backtrace_info, RSpec.configuration.detail_color
+        end
+      end
+
     private
 
       def backtrace_formatter
