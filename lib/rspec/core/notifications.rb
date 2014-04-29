@@ -65,18 +65,18 @@ module RSpec::Core
         lines
       end
 
-      def colorize_message_lines_with colorizer
+      def colorized_message_lines(colorizer)
         message_lines.map do |line|
           colorizer.wrap line, RSpec.configuration.failure_color
         end
       end
 
-      def backtrace
+      def formatted_backtrace
         backtrace_formatter.format_backtrace(exception.backtrace, example.metadata)
       end
 
-      def colorize_backtrace colorizer
-        backtrace.map do |backtrace_info|
+      def colorized_formatted_backtrace(colorizer)
+        formatted_backtrace.map do |backtrace_info|
           colorizer.wrap backtrace_info, RSpec.configuration.detail_color
         end
       end
@@ -137,7 +137,7 @@ module RSpec::Core
         ["Expected pending '#{example.metadata[:execution_result].pending_message}' to fail. No Error was raised."]
       end
 
-      def colorize_with colorizer
+      def colorized_message_lines(colorizer)
         message_lines.map { |line| colorizer.wrap(line, RSpec.configuration.fixed_color) }
       end
     end

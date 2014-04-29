@@ -37,10 +37,10 @@ module RSpec
           failed_example_notifications.each_with_index do |failure, index|
             output.puts
             output.puts "#{short_padding}#{index.next}) #{failure.description}"
-            failure.colorize_message_lines_with(ConsoleCodes).each do |line|
+            failure.colorized_message_lines(ConsoleCodes).each do |line|
               output.puts "#{long_padding}#{line}"
             end
-            failure.colorize_backtrace(ConsoleCodes).each do |line|
+            failure.colorized_formatted_backtrace(ConsoleCodes).each do |line|
               output.puts "#{long_padding}#{line}"
             end
           end
